@@ -29,7 +29,7 @@
 
 | # | Tâche | Difficulté | Statut | Date |
 |---|---|---|---|---|
-| 16 | Matrice ICE — priorisation issues par Impact/Coût/Effort | 🟡 | ⏳ | |
+| 16 | Matrice ICE — priorisation issues par Impact/Coût/Effort | 🟡 | ✅ | 2026-05-05 |
 | 17 | Générateur de meta titles optimisés par produit | 🟡 | ✅ | 2026-05-05 |
 | 18 | Générateur de meta descriptions optimisées par produit | 🟡 | ✅ | 2026-05-05 |
 | 19 | Générateur d'alt text intelligent basé sur nom produit + contexte | 🟡 | ✅ | 2026-05-05 |
