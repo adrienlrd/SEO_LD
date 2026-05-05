@@ -1,0 +1,34 @@
+meta_title:
+  ideal_min: 50
+  ideal_max: 60
+  too_short: 30
+  too_long: 65
+  weight: 0.20
+
+meta_description:
+  ideal_min: 120
+  ideal_max: 155
+  too_short: 80
+  too_long: 160
+  weight: 0.15
+
+alt_text:
+  max_length: 125
+  weight: 0.15
+
+core_web_vitals:
+  lcp_good_ms: 2500
+  lcp_needs_improvement_ms: 4000
+  cls_good: 0.1
+  cls_needs_improvement: 0.25
+  tbt_good_ms: 200
+  tbt_needs_improvement_ms: 600
+  performance_mobile_good: 80
+  performance_desktop_good: 90
+  weight: 0.25
+
+redirections:
+  weight: 0.15
+
+duplicates:
+  weight: 0.10

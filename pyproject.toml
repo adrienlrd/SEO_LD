@@ -1,0 +1,36 @@
+[project]
+name = "leonie-seo"
+version = "0.1.0"
+requires-python = ">=3.11"
+dependencies = [
+    "requests",
+    "pandas",
+    "python-dotenv",
+    "pydantic",
+    "click",
+    "rich",
+    "google-auth",
+    "google-auth-oauthlib",
+    "google-api-python-client",
+    "pyyaml",
+]
+
+[project.optional-dependencies]
+dev = ["pytest", "pytest-mock", "ruff"]
+
+[tool.setuptools]
+packages = ["scripts", "scripts.audit", "scripts.report", "scripts.apply"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+python_functions = ["test_*"]
+addopts = "-v --tb=short"
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP"]
+ignore = ["E501"]
