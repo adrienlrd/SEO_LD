@@ -22,6 +22,8 @@ _SCOPES = ["https://www.googleapis.com/auth/webmasters.readonly"]
 
 
 def _default_site_url() -> str:
+    if url := os.getenv("GSC_SITE_URL"):
+        return url
     domain = os.getenv("SHOPIFY_STORE_DOMAIN", "www.leoniedelacroix.com")
     return f"https://{domain}"
 
