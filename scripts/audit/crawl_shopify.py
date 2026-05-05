@@ -25,10 +25,17 @@ query GetProducts($cursor: String) {
     pageInfo { hasNextPage endCursor }
     edges {
       node {
-        id title handle
+        id title handle status
+        description
         seo { title description }
         images(first: 10) {
           edges { node { id url altText } }
+        }
+        collections(first: 5) {
+          edges { node { title } }
+        }
+        variants(first: 1) {
+          edges { node { price } }
         }
       }
     }
