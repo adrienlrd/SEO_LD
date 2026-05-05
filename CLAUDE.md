@@ -1,89 +1,110 @@
-# Projet SEO — Leoniedelacroix.com
+# CLAUDE.md — SEO Leoniedelacroix.com
 
-## Contexte
-Site Shopify, produits chien et chat, marché français.
-Positionnement : niche premium santé, fabriqué en France, longue traîne.
-URL : https://www.leoniedelacroix.com
-Domaine :  287c4a-bb.myshopify.com
-## Stack technique imposée
-- Python 3.11+ uniquement (pas de JS/TS sauf si indispensable pour MCP)
-- Shopify Admin API GraphQL (API version 2025-01 minimum)
-- Google Search Console API
-- PageSpeed Insights API
-- Ahrefs Webmaster Tools API
-- GA4 Data API
-- Screaming Frog Free (lancement manuel, parsing CSV export)
-- SQLite (historique, via sqlite3 stdlib)
-- GitHub Actions (cron hebdo)
+## 1. CONTEXTE BUSINESS
+- Site Shopify petfood FR, niche premium/santé "fabriqué en France", longue traîne
+- URL : https://www.leoniedelacroix.com · Domaine : 287c4a-bb.myshopify.com
+- **Objectif 12 mois** : 5 000–10 000 visites organiques/mois, 40–100 conversions/mois
+- **Vision** : outil personnel → produit vendable → app Shopify publique
+- Concurrents : Zooplus, Maxi Zoo, Wanimo, Croquetteland, Ultra Premium Direct, Japhy
 
-## MCP servers installés
-- @shopify/dev-mcp (officiel Shopify, documentation + schema)
-- shopify-mcp de GeLi2001 (mutations CRUD produits/metafields)
+## 2. DÉBUT DE SESSION — OBLIGATOIRE
+**À chaque session, dans cet ordre avant toute action :**
+1. Lire `PROGRESS.md` — état actuel, tâches faites, blocages
+2. Lire `ROADMAP.md` — identifier la prochaine tâche ⏳ non faite
+3. Proposer explicitement cette tâche à l'utilisateur avant de coder
 
-## Dépendances Python autorisées
-requests, pandas, python-dotenv, pydantic, click, rich,
-google-auth, google-api-python-client, pyyaml.
-Demander confirmation avant d'ajouter toute autre lib.
+**Ne jamais sauter de tâches.** Suivre l'ordre du PROJECT_BRIEF.md sauf demande explicite.
+**Ne jamais coder sans que le plan soit validé par l'utilisateur.**
 
-## Règles de comportement (NON NÉGOCIABLES)
-1. **Plan avant code.** Toute tâche > 15 lignes commence par un plan
-   en bullet points, validé par l'utilisateur.
-2. **Mode dry-run par défaut.** Tout script qui modifie Shopify doit
-   avoir --dry-run comme comportement par défaut et --apply explicite.
-3. **Confirmation humaine obligatoire** avant chaque appel en écriture
-   sur Shopify pendant les 3 premiers mois du projet.
-4. **Jamais de secrets en dur.** Tout va dans .env, .env.example tenu
-   à jour, .gitignore vérifié avant chaque commit.
-5. **Français uniquement** dans les commits, commentaires, rapports,
-   docstrings, messages CLI.
-6. **Commits atomiques.** Un commit = une fonctionnalité. Format
-   conventionnel : feat:, fix:, docs:, refactor:, chore:.
-7. **Tests minimaux.** Pour chaque fonction qui touche une API,
-   au moins un test unitaire avec réponse mockée.
-8. **Pas d'hallucination de données.** Si une info manque, le script
-   lève une exception explicite au lieu de deviner.
-9. **Mise à jour PROGRESS.md obligatoire** en fin de chaque session :
-   tâches complétées, tâches restantes, blocages éventuels.
+## 3. ÉTAT DES PHASES
+| Phase | Tâches | Horizon | Statut |
+|---|---|---|---|
+| 1 — Audit & Fondations | 1–15 | Semaine 1-2 | ✅ Complète |
+| 2 — Application supervisée | 16–29 | Semaine 3-6 | 🔄 En cours (8/14) |
+| 3 — Contenu SEO & Niche | 30–39 | Mois 2-4 | ⏳ Non démarrée |
+| 4 — Productisation | 40–44 | Mois 6 | ⏳ Non démarrée |
+| 5 — App Shopify publique | 45–50 | Mois 12 | ⏳ Non démarrée |
 
-## Arborescence du repo
-SEO_LD/
-├── CLAUDE.md                  # ce fichier
-├── README.md                  # documentation usage
-├── .env.example               # template secrets
-├── .gitignore
-├── pyproject.toml             # deps + config
-├── requirements.txt
-├── config/
-│   ├── keywords.yaml          # mots-clés cibles par thème
-│   └── seo_rules.yaml         # règles métier (longueurs meta, etc.)
-├── scripts/
-│   ├── audit/                 # lecture seule
-│   │   ├── crawl_shopify.py
-│   │   ├── fetch_gsc.py
-│   │   ├── fetch_pagespeed.py
-│   │   └── detect_issues.py
-│   ├── apply/                 # écriture Shopify (--dry-run par défaut)
-│   │   ├── update_meta.py
-│   │   ├── update_alt_text.py
-│   │   ├── create_redirects.py
-│   │   └── add_schema.py
-│   └── report/
-│       └── generate_report.py
-├── data/
-│   ├── raw/                   # exports bruts (gitignored)
-│   └── history.db             # SQLite
-├── reports/                   # rapports Markdown horodatés
-│   └── YYYY-MM-DD/
-└── .github/
-└── workflows/
-└── weekly_audit.yml
+**Phase 2 — tâches restantes (dans l'ordre) :**
+- `16` Matrice ICE — priorisation issues par Impact/Coût/Effort
+- `22` `create_redirects.py` — import 301 en bulk depuis CSV validé
+- `23` Structured data JSON-LD Product + AggregateRating via metafields
+- `24` Commande rollback SQLite (logging ✅, CLI de rollback manquant)
+- `25` Détecteur opportunités GSC — positions 11–20 à optimiser
+- `26` Analyse concurrentielle longue traîne petfood FR
+- `27` Rapport comparaison avant/après par page (delta score SEO)
+- `28` GitHub Actions cron hebdomadaire — audit auto + commit rapport
+- `29` Alertes email — régression CWV, nouveaux 404, chute de position
 
-## Commandes fréquentes
-- `python -m scripts.audit.crawl_shopify` : crawl complet Shopify
-- `python -m scripts.report.generate_report --week` : rapport hebdo
-- `python -m scripts.apply.update_meta --dry-run --collection=croquettes-chien`
-- `python -m scripts.apply.update_meta --apply --collection=croquettes-chien`
+## 4. RÈGLES NON NÉGOCIABLES
+1. **Plan avant code** — toute tâche >15 lignes → plan validé d'abord
+2. **Dry-run par défaut** — scripts `apply/` : `--dry-run` par défaut, `--apply` explicite
+3. **Confirmation humaine** avant chaque écriture Shopify
+4. **Jamais de secrets en dur** — `.env` uniquement, `.env.example` tenu à jour
+5. **Pas de modification de handles** — risque 404 massif, interdit définitivement
+6. **Commits atomiques** — format `feat:`, `fix:`, `docs:`, `refactor:`, `chore:`
+7. **Tests minimaux** — un test unitaire mocké par fonction qui touche une API
+8. **Pas d'hallucination** — si une donnée manque, lever une exception explicite
+9. **ROADMAP.md** — mettre à jour statut + date après chaque tâche terminée
+10. **shopify-safety** — lancer ce subagent avant tout `--apply`
 
-## Historique des décisions
-(Claude Code remplit cette section à chaque choix structurant)
+## 5. WORKFLOW OBLIGATOIRE
+1. **Explore** → lire PROGRESS.md + ROADMAP.md + fichiers concernés
+2. **Plan** → bullet points soumis à l'utilisateur, pas de code avant validation
+3. **Implement** → coder le plan approuvé uniquement
+4. **Verify** → tests verts + ruff clean + prouver que ça marche
+5. **Update** → ROADMAP.md (statut + date) + PROGRESS.md + commit atomique
 
+## 6. STACK TECHNIQUE
+- Python 3.11+ · Shopify Admin API GraphQL (2025-01 minimum) · SQLite stdlib
+- Google Search Console API · PageSpeed Insights API · GA4 Data API
+- Screaming Frog Free (crawl manuel) · GitHub Actions (cron)
+- Dépendances autorisées : `requests`, `pandas`, `python-dotenv`, `pydantic`, `click`, `rich`, `google-auth`, `google-api-python-client`, `pyyaml`
+- **Demander confirmation avant toute autre dépendance**
+
+## 7. GESTION DU CONTEXTE
+| Seuil | Action |
+|---|---|
+| 0–70% | Travail normal |
+| 70–90% | `/compact` obligatoire |
+| 90%+ | `/clear` obligatoire — hallucinations probables |
+
+## 8. SUBAGENTS (`.claude/agents/`)
+- `shopify-safety` — review sécurité avant tout `--apply`
+- `python-quality` — review qualité avant chaque commit
+
+## 9. ARBORESCENCE
+```
+scripts/audit/       ← lecture seule, sans risque
+scripts/apply/       ← écriture Shopify, dry-run par défaut
+scripts/report/      ← rapports Markdown
+config/              ← keywords.yaml, seo_rules.yaml
+skills/              ← règles SEO, patterns GraphQL, niche petfood
+data/raw/            ← exports bruts (gitignored)
+data/history.db      ← SQLite historique (69 changements loggés)
+reports/YYYY-MM-DD/  ← rapports horodatés
+```
+
+## 10. COMMANDES FRÉQUENTES
+```bash
+python -m scripts.audit.crawl_shopify                          # snapshot Shopify
+python -m scripts.audit.fetch_gsc                              # données GSC 90j
+python -m scripts.audit.fetch_pagespeed                        # Core Web Vitals
+python -m scripts.audit.detect_issues                          # détection problèmes
+python -m scripts.report.generate_report --week                # rapport Markdown
+python -m scripts.apply.generate_suggestions                   # générer suggestions
+python -m scripts.apply.update_meta --updates data/raw/meta_suggestions.json --dry-run
+python -m scripts.apply.update_meta --updates data/raw/meta_suggestions.json --apply
+python -m scripts.apply.update_alt_text --dry-run
+python -m scripts.apply.update_alt_text --apply
+```
+
+## 11. FICHIERS DE RÉFÉRENCE
+- `PROJECT_BRIEF.md` — vision complète, 50 tâches, règles d'or Claude Code
+- `ROADMAP.md` — statuts ✅/🔄/⏳ des 50 tâches, **mettre à jour après chaque tâche**
+- `PROGRESS.md` — état session par session, blocages, prochaines étapes
+- `DECISIONS.md` — journal des choix techniques (compléter à chaque décision)
+- `CONTEXT.md` — fiche marché, concurrents, mots-clés stratégiques
+- `skills/seo-technique.md` — seuils et règles de scoring SEO
+- `skills/shopify-graphql.md` — patterns GraphQL sûrs et rate limiting
+- `skills/petfood-niche.md` — mots-clés, positionnement, règles E-E-A-T

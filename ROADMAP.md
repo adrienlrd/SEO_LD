@@ -30,14 +30,14 @@
 | # | Tâche | Difficulté | Statut | Date |
 |---|---|---|---|---|
 | 16 | Matrice ICE — priorisation issues par Impact/Coût/Effort | 🟡 | ⏳ | |
-| 17 | Générateur de meta titles optimisés par produit | 🟡 | ⏳ | |
-| 18 | Générateur de meta descriptions optimisées par produit | 🟡 | ⏳ | |
-| 19 | Générateur d'alt text intelligent basé sur nom produit + contexte | 🟡 | ⏳ | |
-| 20 | Script `update_meta.py --apply` — push meta vers Shopify | 🟡 | ⏳ | |
-| 21 | Script `update_alt_text.py --apply` — push alt text vers Shopify | 🟡 | ⏳ | |
+| 17 | Générateur de meta titles optimisés par produit | 🟡 | ✅ | 2026-05-05 |
+| 18 | Générateur de meta descriptions optimisées par produit | 🟡 | ✅ | 2026-05-05 |
+| 19 | Générateur d'alt text intelligent basé sur nom produit + contexte | 🟡 | ✅ | 2026-05-05 |
+| 20 | Script `update_meta.py --apply` — push meta vers Shopify (26 items) | 🟡 | ✅ | 2026-05-05 |
+| 21 | Script `update_alt_text.py --apply` — push alt text vers Shopify (17 images) | 🟡 | ✅ | 2026-05-05 |
 | 22 | Script `create_redirects.py` — import 301 en bulk depuis CSV validé | 🟡 | ⏳ | |
 | 23 | Structured data JSON-LD `Product` + `AggregateRating` via metafields | 🔴 | ⏳ | |
-| 24 | Système de rollback SQLite — annuler toute modification appliquée | 🔴 | ⏳ | |
+| 24 | Système de rollback SQLite — logging ✅, commande CLI rollback manquante | 🔴 | 🔄 | |
 | 25 | Détecteur d'opportunités GSC — requêtes positions 11-20 à optimiser | 🟡 | ⏳ | |
 | 26 | Analyse concurrentielle longue traîne — requêtes niche petfood FR | 🔴 | ⏳ | |
 | 27 | Rapport comparaison avant/après par page (delta score SEO) | 🟡 | ⏳ | |
