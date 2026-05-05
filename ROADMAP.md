@@ -37,7 +37,7 @@
 | 21 | Script `update_alt_text.py --apply` — push alt text vers Shopify (17 images) | 🟡 | ✅ | 2026-05-05 |
 | 22 | Script `create_redirects.py` — import 301 en bulk depuis CSV validé | 🟡 | ✅ | 2026-05-05 |
 | 23 | Structured data JSON-LD `Product` + `AggregateRating` via metafields | 🔴 | ✅ | 2026-05-05 |
-| 24 | Système de rollback SQLite — logging ✅, commande CLI rollback manquante | 🔴 | 🔄 | |
+| 24 | Système de rollback SQLite — logging ✅, commande CLI rollback manquante | 🔴 | ✅ | 2026-05-05 |
 | 25 | Détecteur d'opportunités GSC — requêtes positions 11-20 à optimiser | 🟡 | ⏳ | |
 | 26 | Analyse concurrentielle longue traîne — requêtes niche petfood FR | 🔴 | ⏳ | |
 | 27 | Rapport comparaison avant/après par page (delta score SEO) | 🟡 | ⏳ | |
